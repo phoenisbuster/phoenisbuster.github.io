@@ -4,7 +4,7 @@ import { getAnalytics, logEvent, setUserProperties, setUserId } from "https://ww
 import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-messaging.js"
 
 // Firebase Authentication
-import { getAuth, signInWithPopup, TwitterAuthProvider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { getAuth, signInWithPopup, signInWithCredential, TwitterAuthProvider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA-8419FXJhblNYzBxSXgbSRuPJGhlOtkQ",
