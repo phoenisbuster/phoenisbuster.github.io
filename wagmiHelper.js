@@ -1,13 +1,13 @@
 import React from 'https://esm.sh/react@18.2.0'
 import { QueryClient } from 'https://esm.sh/@tanstack/react-query'
-import { createClient } from 'https://esm.sh/viem@2.x'
+// import { createClient } from 'https://esm.sh/viem@2.x'
 import { 
     createConfig, 
     createStorage, 
     useAccount ,
     useBalance
 } from 'https://esm.sh/wagmi'
-import { mainnet, sepolia } from 'https://esm.sh/wagmi/chains'
+import { mainnet, arbitrumSepolia } from 'https://esm.sh/wagmi/chains'
 import { metaMask } from 'https://esm.sh/wagmi/connectors'
 
 const wagmiStorage = createStorage({ storage: localStorage })
