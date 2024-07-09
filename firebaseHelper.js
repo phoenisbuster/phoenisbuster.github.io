@@ -20,7 +20,8 @@ const firebaseConfig = {
 const publicVapidKey =
   "BHU72gbUZspoVUkYJN4Ij2A8bzJAatxT-Uxn-QY3-KG1g9MK0T9zX6rxbY3iZ4qJyQTpHB5En3xo4-3YCzQK2OA";
 
-var firebaseApp
+var firebaseApp;
+var firebaseAuth;
 var firebaseAnalytics;
 var firebaseLogEvent;
 var firebaseSetUserProperties;
@@ -46,13 +47,9 @@ var fcmMessage = null;
 
 //Firebase Authentication -------------------------------------------------
 const provider = new TwitterAuthProvider();
-const auth = getAuth(app);
-auth.languageCode = 'it';
-console.log("auth", auth);
-
 window.signInWithTwitterPopup = function()
 {
-  return signInWithPopup(auth, provider)
+  return signInWithPopup(firebaseAuth, provider)
     .then((result) => {
       // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
       // You can use these server side with your app's credentials to access the Twitter API.
@@ -88,6 +85,8 @@ window.initFirebaseApp = function(config) {
   }
   firebaseApp = initializeApp(config);
   firebaseAnalytics = getAnalytics(firebaseApp);
+  firebaseAuth = getAuth(app);
+  firebaseAuth.languageCode = 'it';
   firebaseLogEvent = logEvent;
   firebaseSetUserProperties = setUserProperties;
   firebaseSetUserId = setUserId;
