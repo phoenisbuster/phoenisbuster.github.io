@@ -4,21 +4,23 @@ import { getAnalytics, logEvent, setUserProperties, setUserId } from "https://ww
 import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-messaging.js"
 
 // Firebase Authentication
-import { getAuth, signInWithPopup, signInWithCredential, TwitterAuthProvider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { getAuth, signInWithPopup, TwitterAuthProvider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA-8419FXJhblNYzBxSXgbSRuPJGhlOtkQ",
-  authDomain: "cocopark-f0d1f.firebaseapp.com",
-  projectId: "cocopark-f0d1f",
-  storageBucket: "cocopark-f0d1f.appspot.com",
-  messagingSenderId: "1030437474910",
-  appId: "1:1030437474910:web:47497aef2391e9f91c9acf",
-  measurementId: "G-9VFKMFBZGJ",
+  apiKey: "AIzaSyDbCyj_JgFAuYw8TzZMDZ8n0jI0-aGH4wg",
+  authDomain: "coco-park-telegram.firebaseapp.com",
+  projectId: "coco-park-telegram",
+  storageBucket: "coco-park-telegram.appspot.com",
+  messagingSenderId: "542915110820",
+  appId: "1:542915110820:web:d2097d4dc54544b6848331",
+  measurementId: "G-E49QQN54NT"
 };
+
 //FCM-----------------------
 const publicVapidKey =
   "BHU72gbUZspoVUkYJN4Ij2A8bzJAatxT-Uxn-QY3-KG1g9MK0T9zX6rxbY3iZ4qJyQTpHB5En3xo4-3YCzQK2OA";
 
+var firebaseApp
 var firebaseAnalytics;
 var firebaseLogEvent;
 var firebaseSetUserProperties;
@@ -34,13 +36,13 @@ var fcmMessage = null;
 //----------------------
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-firebaseAnalytics = getAnalytics(app);
-firebaseLogEvent = logEvent;
-firebaseSetUserProperties = setUserProperties;
-firebaseSetUserId = setUserId;
+// const app = initializeApp(firebaseConfig);
+// firebaseAnalytics = getAnalytics(app);
+// firebaseLogEvent = logEvent;
+// firebaseSetUserProperties = setUserProperties;
+// firebaseSetUserId = setUserId;
 
-console.log("Firebase initialized", app);
+// console.log("Firebase initialized", app);
 
 //Firebase Authentication -------------------------------------------------
 const provider = new TwitterAuthProvider();
@@ -79,43 +81,29 @@ window.signInWithTwitterPopup = function()
     });
 } 
 
-window.signInWithTwitterCred = function()
-{
-  return signInWithCredential(auth, credential)
-    .then((result) => 
-    {
-      // Signed in 
-      const credential = TwitterAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      const secret = credential.secret;
+//FirebaseAnalytics -------------------------------------------------
+window.initFirebaseApp = function(config) {
+  if(config == null) {
+    config = firebaseConfig;
+  }
+  firebaseApp = initializeApp(config);
+  firebaseAnalytics = getAnalytics(firebaseApp);
+  firebaseLogEvent = logEvent;
+  firebaseSetUserProperties = setUserProperties;
+  firebaseSetUserId = setUserId;
 
-      console.log("Sign In Twitter", credential, token, secret);
-      return {token: token, secret: secret, error: false};
-    })
-    .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = TwitterAuthProvider.credentialFromError(error);
-      // ...
-      console.error("Sign In Twitter Error", errorCode, errorMessage, email, credential);
-      return {token: "", secret: "", error: true};
-    });
+  return firebaseApp;
 }
 
-//FirebaseAnalytics -------------------------------------------------
-window.logEvent = function(event_name, param1, param2) {
+window.logFirebaseEvent = function(event_name, param1, param2) {
   firebaseLogEvent(firebaseAnalytics, event_name, param1, param2);
 }
 
-window.setUserProperties = function(property) {
+window.seFirebasetUserProperties = function(property) {
   firebaseSetUserProperties(firebaseAnalytics, property);
 }
 
-window.setUserId = function(userId) {
+window.setFirebaseUserId = function(userId) {
   firebaseSetUserId(firebaseAnalytics, userId);
 }
 //End sFirebaseAnalytics -------------------------------------------------
