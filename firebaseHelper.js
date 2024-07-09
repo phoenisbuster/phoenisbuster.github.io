@@ -85,7 +85,7 @@ window.initFirebaseApp = function(config) {
   }
   firebaseApp = initializeApp(config);
   firebaseAnalytics = getAnalytics(firebaseApp);
-  firebaseAuth = getAuth(app);
+  firebaseAuth = getAuth(firebaseApp);
   firebaseAuth.languageCode = 'it';
   firebaseLogEvent = logEvent;
   firebaseSetUserProperties = setUserProperties;
