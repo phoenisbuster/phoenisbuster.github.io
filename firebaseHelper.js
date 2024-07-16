@@ -94,8 +94,8 @@ window.initFirebaseApp = function(config) {
   return firebaseApp;
 }
 
-window.logFirebaseEvent = function(event_name, param1, param2) {
-  firebaseLogEvent(firebaseAnalytics, event_name, param1, param2);
+window.logFirebaseEvent = function(event_name, data) {
+  firebaseLogEvent(firebaseAnalytics, event_name, data);
 }
 
 window.seFirebasetUserProperties = function(property) {
