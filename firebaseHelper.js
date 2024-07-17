@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-import { getAnalytics, logEvent, setUserProperties, setUserId } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
+import { getAnalytics, logEvent, setUserProperties, setUserId, setAnalyticsCollectionEnabled } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
 //Firebase cloud messaging
 import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-messaging.js"
 
@@ -85,6 +85,7 @@ window.initFirebaseApp = function(config) {
   }
   firebaseApp = initializeApp(config);
   firebaseAnalytics = getAnalytics(firebaseApp);
+  setAnalyticsCollectionEnabled(firebaseAnalytics, true);
   firebaseAuth = getAuth(firebaseApp);
   firebaseAuth.languageCode = 'it';
   firebaseLogEvent = logEvent;
