@@ -1,0 +1,206 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Cocopark - Webhook",
+    "description" : "Webhook for cocopark",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://api-stg.cocopark.fun",
+    "description" : "Staging domain"
+  }, {
+    "url" : "https://api.cocopark.fun",
+    "description" : "Production domain"
+  } ],
+  "paths" : {
+    "/api/v1/user/get-ref-by-address" : {
+      "get" : {
+        "summary" : "Get Ref By Wallet",
+        "description" : "Get Ref By Wallet",
+        "operationId" : "prodGetRefByWallet",
+        "parameters" : [ {
+          "name" : "address",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "example" : "UQDRZIkRU-uwEtksNaoo1ghLJRCpXJb4FXU7LpxtshgLOKNJ"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          }
+        }
+      }
+    },
+    "/api/v1/user/get-ref-by-tele" : {
+      "get" : {
+        "summary" : "Get Ref By Tele",
+        "description" : "Get Ref By Tele",
+        "operationId" : "prodGetRefByTele",
+        "parameters" : [ {
+          "name" : "telegram_id",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "example" : "1164223929"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          }
+        }
+      }
+    },
+    "/api/v1/game/complete-nft-tx" : {
+      "post" : {
+        "summary" : "Complete NFT Tx",
+        "description" : "Complete NFT Tx",
+        "operationId" : "stgCompleteNftTx",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/game_completenfttx_body"
+              },
+              "examples" : {
+                "[STG] Complete NFT Tx" : {
+                  "value" : {
+                    "ammount" : 0.2,
+                    "collection_address" : "0:39dce4b6d7b7186300e5aff31a05237d4d3da8b49dcd535c70b37dcbdfecec85",
+                    "nft_addresses" : [ "0:001d3abb24e58eb7c3aa08ec7069e539dc91c2b62466f8ecdadf9b29a912bb87" ],
+                    "receipt" : "de752b71-3d9e-4998-8700-2b0d00fe4d45",
+                    "telegram_id" : 0,
+                    "to_address" : "0:0a05d24c25c0c6d7ee402d7b11defbb0a51be8e811e5f424139775c8b87fb7d3"
+                  }
+                },
+                "[PROD] Complete NFT Tx" : {
+                  "value" : {
+                    "ammount" : 1,
+                    "collection_address" : "0:114be6d332e62e0e3343abc8f7243b8cb1175f66cad7a42436b0842cb00fabbb",
+                    "nft_addresses" : [ "0:efd83849971d6c231c0318572a7893cbb3cbfbdc3ce5d9a10bc3d5d4794f6a3" ],
+                    "receipt" : "500e902c-3ae6-4fad-85b1-2dda47739dc0",
+                    "telegram_id" : 0,
+                    "to_address" : "0:a549b18d9eafd9af4133a45b64b752e2833dffd43337f5e07e98d89761f46ef6"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : ""
+          }
+        },
+        "security" : [ { } ]
+      }
+    },
+    "/api/v1/user/add-copa-staking" : {
+      "post" : {
+        "summary" : "Update copa staking",
+        "description" : "Update copa staking",
+        "operationId" : "stgUpdateCopaStaking",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/user_addcopastaking_body"
+              },
+              "examples" : {
+                "[STG] Update copa staking" : {
+                  "value" : {
+                    "reward" : 10,
+                    "safe_id" : "ZWHH9621",
+                    "telegram_id" : 5540374142,
+                    "wallet" : "UQAqKQd6M8ZxlF9zmi2FLdosoDj_LNM-4VEi2pSAvnpDsZnD"
+                  }
+                },
+                "[PROD] Update copa staking" : {
+                  "value" : {
+                    "reward" : 10,
+                    "safe_id" : "",
+                    "telegram_id" : 5540374142,
+                    "wallet" : ""
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : ""
+          }
+        },
+        "security" : [ { } ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "user_addcopastaking_body" : {
+        "type" : "object",
+        "properties" : {
+          "reward" : {
+            "type" : "number",
+            "example" : 10
+          },
+          "safe_id" : {
+            "type" : "string",
+            "example" : ""
+          },
+          "telegram_id" : {
+            "type" : "number",
+            "example" : 5540374142
+          },
+          "wallet" : {
+            "type" : "string",
+            "example" : ""
+          }
+        }
+      },
+      "game_completenfttx_body" : {
+        "type" : "object",
+        "properties" : {
+          "ammount" : {
+            "type" : "number",
+            "example" : 1
+          },
+          "collection_address" : {
+            "type" : "string",
+            "example" : "0:114be6d332e62e0e3343abc8f7243b8cb1175f66cad7a42436b0842cb00fabbb"
+          },
+          "nft_addresses" : {
+            "type" : "array",
+            "example" : [ "0:efd83849971d6c231c0318572a7893cbb3cbfbdc3ce5d9a10bc3d5d4794f6a3" ],
+            "items" : {
+              "type" : "string",
+              "example" : "0:efd83849971d6c231c0318572a7893cbb3cbfbdc3ce5d9a10bc3d5d4794f6a3"
+            }
+          },
+          "receipt" : {
+            "type" : "string",
+            "example" : "500e902c-3ae6-4fad-85b1-2dda47739dc0"
+          },
+          "telegram_id" : {
+            "type" : "number",
+            "example" : 0
+          },
+          "to_address" : {
+            "type" : "string",
+            "example" : "0:a549b18d9eafd9af4133a45b64b752e2833dffd43337f5e07e98d89761f46ef6"
+          }
+        }
+      }
+    },
+    "securitySchemes" : { }
+  }
+}
